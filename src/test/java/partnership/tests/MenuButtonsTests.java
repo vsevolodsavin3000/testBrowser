@@ -5,6 +5,7 @@ import org.openqa.selenium.TimeoutException;
 import partnership.pageObjects.menuBar.*;
 import partnership.pageObjects.otherElements.OtherCommonElements;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class MenuButtonsTests extends FunctionalTest {
 
     @BeforeAll
-    public static void forStarters() throws InterruptedException {
+    public static void forStarters() throws InterruptedException, IOException {
         LoginTest loginTest = new LoginTest();
         loginTest.signUp();
     }

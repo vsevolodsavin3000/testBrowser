@@ -64,9 +64,9 @@ public class RegistrationTest extends FunctionalTest{
         mailPage.pressLinkInsideMessage();
         assertEquals("Для начала работы в партнёрской программе необходимо произвести активацию вашего аккаунта.\n" +
                 "Для этого, вам необходимо связаться с вашим личным менеджером по этим контактам:\n" +
-                "Skype: MKS group\n" +
-                "Telegram: @MKSgroup\n" +
-                "Почта: v.sergienko@mks.group",registrationPage.getAlertMessage());
+                "Skype: i_roman_ko\n" +
+                "Telegram: @RomanMKS\n" +
+                "Почта: r.kovtun@elari.net",registrationPage.getAlertMessage());
 
         loginPage.enterLoginPass("s.kastanov@adviator.com","kKGUpb9T");
         loginPage.submit();
