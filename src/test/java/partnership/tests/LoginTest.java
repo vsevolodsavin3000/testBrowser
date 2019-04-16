@@ -17,7 +17,7 @@ public class LoginTest extends FunctionalTest {
 
 
     @Test
-    @DisplayName("Correct login process")
+    @DisplayName("Login")
     public void signUp() throws InterruptedException, IOException {
         driver.get("https://partners.mks.group");
 
