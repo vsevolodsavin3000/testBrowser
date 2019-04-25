@@ -6,18 +6,27 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.junit.runners.Suite;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import partnership.helper.Parallelized;
+import partnership.tests.LoginTest;
+import partnership.tests.MenuButtonsTests;
+import partnership.tests.RegistrationTest;
 
 import java.io.FileReader;
 import java.net.URL;
 import java.util.*;
 
 @RunWith(Parallelized.class)
+//@Suite.SuiteClasses({LoginTest.class, MenuButtonsTests.class, RegistrationTest.class})
 public class BrowserStackJUnitTest {
     public WebDriver driver;
     private Local l;
@@ -30,6 +39,7 @@ public class BrowserStackJUnitTest {
     @Parameterized.Parameters
     public static Iterable<? extends Object> data() throws Exception {
         JSONParser parser = new JSONParser();
+        System.setProperty("config","single.conf.json");
         config = (JSONObject) parser.parse(new FileReader("src/test/resources/conf/" + System.getProperty("config")));
         int envs = ((JSONArray)config.get("environments")).size();
 
@@ -41,7 +51,7 @@ public class BrowserStackJUnitTest {
         return taskIDs;
     }
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         JSONArray envs = (JSONArray) config.get("environments");
 
@@ -88,7 +98,7 @@ public class BrowserStackJUnitTest {
         driver = new RemoteWebDriver(new URL("http://"+username+":"+accessKey+"@"+config.get("server")+"/wd/hub"), capabilities);
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         driver.quit();
         if(l != null) l.stop();

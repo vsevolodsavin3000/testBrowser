@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class MenuButtonsTests extends FunctionalTest {
+public class MenuButtonsTests extends BrowserStackJUnitTest {
 
     @BeforeAll
     public static void forStarters() throws InterruptedException, IOException {

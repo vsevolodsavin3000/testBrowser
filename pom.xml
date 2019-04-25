@@ -3,17 +3,22 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.example</groupId>
-    <artifactId>junit5-jupiter-starter-maven</artifactId>
-    <packaging>jar</packaging>
+    <groupId>partnership.tests</groupId>
+    <artifactId>testBrowser</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
+        <surefire.version>2.19.1</surefire.version>
+
+        <test.file></test.file>
+        <config.file>default</config.file>
 
         <junit.jupiter.version>5.3.1</junit.jupiter.version>
+
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
     </properties>
 
     <dependencies>
@@ -30,6 +35,11 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.3.2</version>
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -94,13 +104,77 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M1</version>
-                <configuration>
+<!--                <configuration>
                     <includes>
                         <include>${basedir}/src/test/java/partnership</include>
                     </includes>
-                </configuration>
+                </configuration>-->
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>registration</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <includes>
+                                <include>partnership/tests/RegistrationTest.java</include>
+                            </includes>
+                            <systemPropertyVariables>
+                                <config>registration.conf.json</config>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+<!--        <profile>
+            <id>local</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <includes>
+                                <include>com/browserstack/LocalTest.java</include>
+                            </includes>
+                            <systemPropertyVariables>
+                                <config>local.conf.json</config>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>-->
+
+        <profile>
+            <id>parallel</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <includes>
+                                <include>partnership/tests/LoginTest.java</include>
+                                <include>partnership/tests/RegistrationTest.java</include>
+                                <include>partnership/tests/MenuButtonsTests.java</include>
+                            </includes>
+                            <systemPropertyVariables>
+                                <config>parallel.conf.json</config>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>

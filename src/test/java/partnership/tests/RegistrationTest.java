@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class RegistrationTest extends FunctionalTest{
+public class RegistrationTest extends BrowserStackJUnitTest {
 
     @Test
     @DisplayName("Registration check")

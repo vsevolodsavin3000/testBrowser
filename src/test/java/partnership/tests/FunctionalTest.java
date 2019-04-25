@@ -8,11 +8,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public class FunctionalTest {
+//для запуска без браузерстака
+
+public class FunctionalTest   {
     protected static WebDriver driver;
 
     @BeforeAll
-    public static void setUp(){
+    public static void setUpDriver(){
         System.setProperty("webdriver.chrome.driver","C:/chromeDriver/chromedriver.exe");
         driver = new ChromeDriver();
         //driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
@@ -25,7 +27,7 @@ public class FunctionalTest {
     }
 
     @AfterAll
-    public static void tearDown(){
+    public static void tearDownDriver(){
         //driver.manage().deleteAllCookies();
         for(String window : driver.getWindowHandles() ){
             driver.switchTo().window(window).close();
